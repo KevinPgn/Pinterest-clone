@@ -15,9 +15,18 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
- 
+  pins          Pin[]
+
+  registerPosts RegisterPost[]
+  likes Like[]
+  comments Comment[]
+
+  followers Follow[] @relation("follower")
+  following Follow[] @relation("following")
+
+  blockedUsers BlockUser[] @relation("BlockedUsers")
+  blockedBy BlockUser[] @relation("BlockedBy")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -63,17 +72,104 @@ model VerificationToken {
   @@unique([identifier, token])
 }
  
-// Optional for WebAuthn support
-model Authenticator {
-  id                   String  @id @default(cuid())
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
- 
+// pintereset clone
+
+model Pin {
+  id String @id @default(cuid())
+
+  title String
+  description String
+  imageUrl String
+  link String
+  views Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  registerPosts RegisterPost[]
+  likes Like[]
+  comments Comment[]
+
+  @@index([authorId])
+}
+
+model RegisterPost {
+  id String @id @default(cuid())
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  pinId String
+  pin Pin @relation(fields: [pinId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([authorId, pinId])
+}
+
+model Follow {
+  id String @id @default(cuid())
+
+  followerId String
+  follower User @relation(name: "follower", fields: [followerId], references: [id], onDelete: Cascade)
+
+  followingId String
+  following User @relation(name: "following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([followerId, followingId])
+}
+
+model Comment {
+  id String @id @default(cuid())
+  content String
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  pinId String
+  pin Pin @relation(fields: [pinId], references: [id], onDelete: Cascade)
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId, pinId])
+}
+
+model Like {
+  id String @id @default(cuid())
+
+  userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  pinId String
+  pin Pin @relation(fields: [pinId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, pinId])
+}
+
+model BlockUser {
+  id String @id @default(cuid())
+
+  authorId String
+  author User @relation(name: "BlockedUsers", fields: [authorId], references: [id], onDelete: Cascade)
+
+  blockedUserId String
+  blockedUser User @relation(name: "BlockedBy", fields: [blockedUserId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId, blockedUserId])
+  @@unique([authorId, blockedUserId])
 }
