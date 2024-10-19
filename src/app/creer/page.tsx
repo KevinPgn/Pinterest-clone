@@ -12,7 +12,7 @@ const CreatePinPage = () => {
               <h2 className='text-xl font-medium'>Créer une Épingle</h2>
             </div>
 
-            <main className='max-w-[1200px] mx-auto mt-10'>
+            <main className='max-w-[1000px] mx-auto mt-10'>
                 <CreateNewPin />
             </main>
         </div>
