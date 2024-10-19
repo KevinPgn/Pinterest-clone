@@ -43,7 +43,7 @@ export const CreateNewPin = () => {
         <Button className='w-full rounded-full bg-gray-200 text-black hover:bg-gray-300 text-md font-medium'>Enregistrer depuis une URL</Button>
         </>
       ): (
-          <img src={imageUrl} alt='image' className='w-full h-[300px] rounded-3xl' />
+          <img src={imageUrl} alt='image' className='w-full h-[300px] rounded-3xl object-contain' />
       )}
     </div>
 
