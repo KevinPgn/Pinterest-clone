@@ -11,7 +11,7 @@ export const Navbar = async () => {
   return <header className="w-full p-3 h-14">
     <nav className="flex items-center gap-1">
         <Link href="/">
-            <Image src="/Pinterest-logo.png" alt="logo" width={60} height={60} className="cursor-pointer object-cover p-3 hover:bg-gray-100 rounded-full duration-300" />
+            <Image src="/Pinterest-logo.png" alt="logo" width={65} height={65} className="cursor-pointer object-cover p-3 hover:bg-gray-100 rounded-full duration-300" />
         </Link>
         <Links />
         <Searchbar />
