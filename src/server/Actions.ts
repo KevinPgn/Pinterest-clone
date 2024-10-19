@@ -8,7 +8,8 @@ import {cache} from "react"
 export const GetPins = cache(async () => {
     const pins = await prisma.pin.findMany({
         orderBy: { createdAt: "desc" },
-        select: { imageUrl: true }
+        select: { imageUrl: true, id: true},
+        take: 15
     })
 
     return pins
