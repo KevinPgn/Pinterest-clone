@@ -2,16 +2,21 @@
 import {useForm} from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { UploadDropzone } from '../utils/uploadthing'
+import { useState } from 'react'
+// title, description, imageUrl, link
 
 export const CreateNewPin = () => {
+  const [imageUrl, setImageUrl] = useState<string>("")
+
   return <div className="flex items-start gap-5 max-md:flex-col">
     {/* left side */}
     <div className='w-[35%]'>
-      <div className='w-full h-[500px] flex-col bg-gray-200 rounded-3xl border border-dashed border-gray-400 flex items-center justify-center'>
+      {!imageUrl ? (
+        <div className='w-full h-[500px] flex-col bg-gray-200 rounded-3xl border border-dashed border-gray-400 flex items-center justify-center'>
         <UploadDropzone
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
-            console.log(res)
+            setImageUrl(res[0].url)
           }}
           onUploadError={(error: Error) => {
             console.log(error)
@@ -21,6 +26,11 @@ export const CreateNewPin = () => {
           maximum de 200 Mb Mo.
         </p>
       </div>
+      ): (
+        <div className='w-full h-[500px] flex-col bg-gray-200 rounded-3xl border border-dashed border-gray-400 flex items-center justify-center'>
+          <img src={imageUrl} alt='image' className='w-full h-[500px] object-cover' />
+        </div>
+      )}
       <div className='w-full h-[1px] bg-gray-400 my-5'></div>
       <Button className='w-full rounded-full bg-gray-200 text-black hover:bg-gray-300 text-md font-medium'>Enregistrer depuis une URL</Button>
     </div>
