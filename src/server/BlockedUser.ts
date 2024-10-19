@@ -10,7 +10,7 @@ export const BlockUser = authenticatedAction
         userId: z.string()
     }))
     .action(async ({parsedInput:{userId}, ctx:{userId: currentUserId}}) => {
-        const existingBlock = await prisma.blockUser.findUnique({
+        const existingBlockedUser = await prisma.blockUser.findUnique({
             where: {
                 authorId_blockedUserId: {
                     authorId: currentUserId,
@@ -18,11 +18,11 @@ export const BlockUser = authenticatedAction
                 }
             }
         })
-
-        if(existingBlock){
+        
+        if(existingBlockedUser){
             await prisma.blockUser.delete({
                 where: {
-                    id: existingBlock.id
+                    id: existingBlockedUser.id
                 }
             })
         }else{
