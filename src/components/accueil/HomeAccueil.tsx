@@ -2,6 +2,7 @@ import { GetPins } from "@/server/Actions"
 import { Button } from "../ui/button";
 import {Share, Ellipsis} from "lucide-react"
 import Link from "next/link"
+import { ButtonRegister } from "../utils/ButtonRegister";
 
 export async function HomeAccueil() {
   const pins = await GetPins()
@@ -23,7 +24,7 @@ export async function HomeAccueil() {
             </Link>
             
           <div className="hidden group-hover:block w-full h-full duration-75">
-            <Button className="bg-red-500 absolute top-5 right-5 rounded-full hover:bg-red-600 py-6 text-md">Enregistrer</Button>
+            <ButtonRegister postId={pin.id} isRegistered={pin.isRegistered} />
             <div className="absolute bottom-5 right-5 flex items-center gap-3">
               <div className="bg-white rounded-full p-2 hover:bg-gray-200 duration-75">
                 <Share size={20} />
