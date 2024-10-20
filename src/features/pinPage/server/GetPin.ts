@@ -18,6 +18,22 @@ export const getPin = cache(async (pinId: string) => {
             title: true,
             description: true,
             createdAt: true,
+            comments: {
+                select: {
+                    id: true,
+                    content: true,
+                    createdAt: true,
+                    author: {
+                        select: {
+                            id: true,
+                            name: true,
+                            image: true,
+                        }
+                    }
+                },
+                orderBy: {createdAt: "desc"},
+                take: 20
+            },
             _count: {
                 select: {
                     likes: true,
