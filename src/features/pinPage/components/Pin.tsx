@@ -1,6 +1,7 @@
 import { ButtonFollow } from "@/components/utils/ButtonFollow"
 import { ButtonRegister } from "@/components/utils/ButtonRegister"
-import { Heart, Share, Ellipsis } from "lucide-react"
+import { Heart, Share, Ellipsis, ChevronUp } from "lucide-react"
+import { formatDistanceToNow } from "date-fns"
 
 export const Pin = ({pin}: {pin: any}) => {
   return <div className="w-full min-h-[829px] shadow-md rounded-lg flex gap-5">
@@ -41,6 +42,24 @@ export const Pin = ({pin}: {pin: any}) => {
 
             <ButtonFollow />
         </div>
+
+        {/* Comments */}
+        <div className="flex items-center justify-between mt-10">
+            <p className="text-md font-medium">{pin._count.comments} commentaires</p>
+            <ChevronUp size={30} className="cursor-pointer"/>
+        </div>
+        {pin._count.comments === 0 ? <div className="mt-5"><p className="text-sm text-gray-500">Aucun commentaire pour le moment</p></div>:null}
+    
+        {pin.comments.map((comment: any) => (
+            <div key={comment.id} className="mt-5 flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                    <img src={comment.author.image} alt={comment.author.name} className="w-8 h-8 rounded-full object-cover" />
+                    <span className="text-sm font-medium">{comment.author.name}</span>
+                    <p className="text-sm">{comment.content}</p>
+                    <p className="text-sm text-gray-500">{formatDistanceToNow(comment.createdAt, {addSuffix: true})}</p>
+                </div>
+            </div>
+        ))  }
     </div>
   </div>
 }
