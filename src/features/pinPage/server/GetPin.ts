@@ -56,12 +56,18 @@ export const getPin = cache(async (pinId: string) => {
                 likes: {
                     where: {userId: currentUser}
                 }
+            } : {}),
+            ...(currentUser ? {
+                registerPosts: {
+                    where: {authorId: currentUser}
+                }
             } : {})
         }
     })
 
     return {
         ...pin,
-        isLiked: currentUser && pin?.likes && pin.likes.length > 0
+        isLiked: currentUser && pin?.likes && pin.likes.length > 0,
+        isRegistered: currentUser && pin?.registerPosts && pin.registerPosts.length > 0
     }
 })

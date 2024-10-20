@@ -8,7 +8,8 @@ import { getSession } from "@/components/utils/CacheSession"
 export const Pin = async ({pin}: {pin: any}) => {
   const session = await getSession()
   const userId = session?.user?.id
-  
+  const isRegistered = pin.isRegistered
+  console.log(isRegistered)
   return <div className="w-full min-h-[829px] shadow-md rounded-lg flex gap-5">
     <div className="w-[50%]">
         <img src={pin.imageUrl} alt={pin.title} className="w-full object-cover rounded-lg" />
@@ -26,7 +27,7 @@ export const Pin = async ({pin}: {pin: any}) => {
                 <Ellipsis size={21} className="cursor-pointer"/>
             </div>
 
-            <ButtonRegister />
+            <ButtonRegister postId={pin.id} isRegistered={isRegistered} />
         </div>
 
         {/* title and description */}
