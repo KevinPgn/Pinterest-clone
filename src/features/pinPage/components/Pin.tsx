@@ -3,8 +3,12 @@ import { ButtonRegister } from "@/components/utils/ButtonRegister"
 import { Heart, Share, Ellipsis, ChevronUp } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 import { FormComment } from "./FormComment"
+import { getSession } from "@/components/utils/CacheSession"
 
-export const Pin = ({pin}: {pin: any}) => {
+export const Pin = async ({pin}: {pin: any}) => {
+  const session = await getSession()
+  const userId = session?.user?.id
+  
   return <div className="w-full min-h-[829px] shadow-md rounded-lg flex gap-5">
     <div className="w-[50%]">
         <img src={pin.imageUrl} alt={pin.title} className="w-full object-cover rounded-lg" />
@@ -41,7 +45,7 @@ export const Pin = ({pin}: {pin: any}) => {
                 </div>
             </div>
 
-            <ButtonFollow />
+            {pin.author.id === userId ? null : <ButtonFollow />}
         </div>
 
         {/* Comments */}
