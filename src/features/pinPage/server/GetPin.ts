@@ -21,14 +21,19 @@ export const getPin = cache(async (pinId: string) => {
             _count: {
                 select: {
                     likes: true,
-                    comments: true
+                    comments: true,
                 }
             },
             author: {
                 select: {
                     id: true,
                     name: true,
-                    image: true
+                    image: true,
+                    _count: {
+                        select: {
+                            followers: true,
+                        }
+                    }
                 }
             },
             ...(currentUser ? {
