@@ -5,7 +5,7 @@ import { Heart, Share, Ellipsis } from "lucide-react"
 export const Pin = ({pin}: {pin: any}) => {
   return <div className="w-full min-h-[829px] shadow-md rounded-lg flex gap-5">
     <div className="w-[50%]">
-        <img src={pin.imageUrl} alt={pin.title} className="w-full h-full object-cover rounded-tl-lg rounded-bl-lg" />
+        <img src={pin.imageUrl} alt={pin.title} className="w-full object-cover rounded-lg" />
     </div>
 
     <div className="w-[50%] p-5 py-7">
@@ -21,6 +21,12 @@ export const Pin = ({pin}: {pin: any}) => {
             </div>
 
             <ButtonRegister />
+        </div>
+
+        {/* title and description */}
+        <div className="mt-5">
+            <p className="text-xl font-semibold">{pin.title}</p>
+            <p className="text-sm mt-2">{pin.description}</p>
         </div>
 
         {/* User Informations */}
