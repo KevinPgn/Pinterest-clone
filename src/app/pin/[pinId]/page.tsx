@@ -1,4 +1,5 @@
 import { getPin } from "@/features/pinPage/server/GetPin"
+import { BackToHome } from "@/features/pinPage/components/BackToHome"
 
 interface PinPageProps {
     params: {
@@ -10,7 +11,9 @@ const PinPage = async ({params}: PinPageProps) => {
   const pin = await getPin(params.pinId)
   
   return (
-    <div>PinPage</div>
+    <section className="max-w-[1200px] mx-auto mt-5">
+        <BackToHome />
+    </section>
   )
 }
 
