@@ -1,12 +1,18 @@
 "use client"
 import { Input } from "@/components/ui/input"
 import {useForm} from "react-hook-form"
+import { createNewComment } from "../server/CreateComment"
 
-export const FormComment = () => {
+export const FormComment = ({pinId}: {pinId: string}) => {
   const {register, handleSubmit, reset, formState: {errors}} = useForm()
 
   const onSubmit = async (data: any) => {
-    console.log(data)
+    try {
+      await createNewComment({content: data.content, pinId})
+      reset()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return <>

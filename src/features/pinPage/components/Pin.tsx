@@ -54,9 +54,11 @@ export const Pin = ({pin}: {pin: any}) => {
         <div className="mt-5 overflow-y-auto max-h-[300px]">
             {pin.comments.map((comment: any) => (
                 <div key={comment.id} className="flex flex-col gap-3">
-                    <div className="flex items-center gap-2">
-                        <img src={comment.author.image} alt={comment.author.name} className="w-8 h-8 rounded-full object-cover" />
-                        <span className="text-sm font-medium">{comment.author.name}</span>
+                    <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                            <img src={comment.author.image} alt={comment.author.name} className="w-8 h-8 rounded-full object-cover" />
+                            <span className="text-sm font-medium">{comment.author.name}</span>
+                        </div>
                         <p className="text-sm">{comment.content}</p>
                         <p className="text-sm text-gray-500">{formatDistanceToNow(comment.createdAt, {addSuffix: true})}</p>
                     </div>
@@ -64,7 +66,7 @@ export const Pin = ({pin}: {pin: any}) => {
             ))}
         </div>
 
-        <FormComment />
+        <FormComment pinId={pin.id} />
     </div>
   </div>
 }
