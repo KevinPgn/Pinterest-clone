@@ -1,4 +1,6 @@
+import { InformationsUser } from '@/features/profileUser/components/InformationsUser';
 import React from 'react'
+import { getProfileUser } from '@/features/profileUser/server/getProfileUser';
 
 interface ProfileUserProps {
   params: Promise<{
@@ -8,9 +10,15 @@ interface ProfileUserProps {
 
 const ProfileUser = async (props: ProfileUserProps) => {
   const {userId} = await props.params;
+  const userDetails = await getProfileUser(userId)
 
   return (
-    <div>ProfileUser</div>
+    <section className='w-full px-2'>
+        {/* informations user */}
+        <InformationsUser userDetails={userDetails} />
+        
+        {/* pins user */}
+    </section>
   )
 }
 
