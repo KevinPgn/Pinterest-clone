@@ -1,10 +1,11 @@
 import { ButtonFollow } from "@/components/utils/ButtonFollow"
 import { ButtonRegister } from "@/components/utils/ButtonRegister"
-import { Heart, Share, Ellipsis, ChevronUp } from "lucide-react"
+import { Share, Ellipsis, ChevronUp } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 import { FormComment } from "./FormComment"
 import { getSession } from "@/components/utils/CacheSession"
 import { LikePost } from "./LikePost"
+import Link from "next/link"
 
 export const Pin = async ({pin}: {pin: any}) => {
   const session = await getSession()
@@ -41,7 +42,9 @@ export const Pin = async ({pin}: {pin: any}) => {
         {/* User Informations */}
         <div className="flex items-center justify-between mt-10">
             <div className="flex items-center gap-3">
-                <img src={pin.author.image} alt={pin.author.name} className="w-10 h-10 rounded-full object-cover" />
+                <Link href={`/profile/${pin.author.id}`}>
+                    <img src={pin.author.image} alt={pin.author.name} className="w-10 h-10 rounded-full object-cover" />
+                </Link>
                 <div className="flex flex-col">
                     <p className="text-sm font-medium">{pin.author.name}</p>
                     <p className="text-sm">{pin.author._count.followers} abonnés</p>
