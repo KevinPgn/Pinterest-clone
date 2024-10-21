@@ -19,7 +19,7 @@ export const InformationsUser = ({userDetails}: {userDetails: any}) => {
       <Share className="w-7 h-7 cursor-pointer" />
       <div className="flex gap-3">
         <Button variant="outline" className="rounded-full bg-gray-200 text-black text-md py-6 px-5 hover:bg-gray-100">Message</Button>
-        <Button variant="outline" className="rounded-full bg-[#E60023] text-white text-md py-6 px-5 hover:bg-[#E60023]/80">S'abonner</Button>
+        <Button variant="outline" className="rounded-full bg-[#E60023] text-white text-md py-6 px-5 hover:bg-[#E60023]/80 hover:text-white">S'abonner</Button>
       </div>
       <Ellipsis className="w-7 h-7 cursor-pointer" />
     </div>
