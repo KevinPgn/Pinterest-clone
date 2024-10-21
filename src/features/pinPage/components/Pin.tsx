@@ -42,7 +42,7 @@ export const Pin = async ({pin}: {pin: any}) => {
         {/* User Informations */}
         <div className="flex items-center justify-between mt-10">
             <div className="flex items-center gap-3">
-                <Link href={`/profile/${pin.author.id}`}>
+                <Link href={`/${pin.author.id}`}>
                     <img src={pin.author.image} alt={pin.author.name} className="w-10 h-10 rounded-full object-cover" />
                 </Link>
                 <div className="flex flex-col">
