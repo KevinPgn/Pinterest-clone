@@ -2,13 +2,14 @@ import { Share, Ellipsis } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getSession } from "@/components/utils/CacheSession";
 import { FollowButton } from "./FollowButton";
+import { BtnEditProfile } from "./BtnEditProfile";
 
 export const InformationsUser = async ({userDetails}: {userDetails: any}) => {
   const session = await getSession();
   const sessionUserId = session?.user?.id;
   const isFollowing = userDetails.isFollowing;
   console.log(isFollowing)
-  
+
   return <div className="max-w-[650px] mx-auto flex flex-col mt-5">
     <div className="w-full h-[350px] bg-blue-500 rounded-[30px] relative">
       <img src={userDetails.image} alt="user image" className="w-[110px] absolute h-[110px] rounded-full bottom-[-50px] left-[50%] translate-x-[-50%] border-2 border-white object-cover" />
@@ -26,7 +27,7 @@ export const InformationsUser = async ({userDetails}: {userDetails: any}) => {
       <Share className="w-7 h-7 cursor-pointer" />
       {sessionUserId === userDetails.id ? (
         <div>
-           <Button variant="outline" className="rounded-full bg-[#E60023] text-white text-md py-6 px-5 hover:bg-[#E60023]/80 hover:text-white">Modifier Profile</Button>
+          <BtnEditProfile />
         </div>
       ): (
         <div className="flex gap-3">
