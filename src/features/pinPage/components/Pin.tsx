@@ -4,12 +4,14 @@ import { Heart, Share, Ellipsis, ChevronUp } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 import { FormComment } from "./FormComment"
 import { getSession } from "@/components/utils/CacheSession"
+import { LikePost } from "./LikePost"
 
 export const Pin = async ({pin}: {pin: any}) => {
   const session = await getSession()
   const userId = session?.user?.id
   const isRegistered = pin.isRegistered
-  console.log(isRegistered)
+  const isLiked = pin.isLiked
+  
   return <div className="w-full min-h-[829px] shadow-md rounded-lg flex gap-5">
     <div className="w-[50%]">
         <img src={pin.imageUrl} alt={pin.title} className="w-full object-cover rounded-lg" />
@@ -20,7 +22,7 @@ export const Pin = async ({pin}: {pin: any}) => {
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
                 <div className="flex items-center gap-4">
-                    <Heart size={21} className="cursor-pointer"/>
+                    <LikePost pinId={pin.id} isLiked={isLiked} />
                     <p className="text-md font-semibold">{pin._count.likes}</p>
                 </div>
                 <Share size={21} className="cursor-pointer"/>
