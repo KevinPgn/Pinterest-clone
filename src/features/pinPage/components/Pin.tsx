@@ -6,6 +6,7 @@ import { FormComment } from "./FormComment"
 import { getSession } from "@/components/utils/CacheSession"
 import { LikePost } from "./LikePost"
 import Link from "next/link"
+import { FollowButton } from "@/features/profileUser/components/FollowButton"
 
 export const Pin = async ({pin}: {pin: any}) => {
   const session = await getSession()
@@ -51,7 +52,7 @@ export const Pin = async ({pin}: {pin: any}) => {
                 </div>
             </div>
 
-            {pin.author.id === userId ? null : <ButtonFollow />}
+            {pin.author.id === userId ? null : <FollowButton userToFollowId={pin.author.id} isFollowing={pin.author.isFollowing} />}
         </div>
 
         {/* Comments */}

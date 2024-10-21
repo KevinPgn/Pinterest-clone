@@ -61,13 +61,13 @@ export const getPin = cache(async (pinId: string) => {
                 registerPosts: {
                     where: {authorId: currentUser}
                 }
-            } : {})
+            } : {}),
         }
     })
 
     return {
         ...pin,
         isLiked: currentUser && pin?.likes && pin.likes.length > 0,
-        isRegistered: currentUser && pin?.registerPosts && pin.registerPosts.length > 0
+        isRegistered: currentUser && pin?.registerPosts && pin.registerPosts.length > 0,
     }
 })
